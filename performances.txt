@@ -1,0 +1,44 @@
+# Initialising the CNN
+classifier = Sequential()
+
+# Step 1 - Convolution
+
+# Original: Convolution2D(64, 3, 3, input_shape = (64, 64, 3), activation = 'relu')
+
+
+classifier.add(Convolution2D(32, (5, 5), input_shape = (64, 64, 3), activation = 'relu'))
+
+# Step 2 - Pooling
+classifier.add(MaxPooling2D(pool_size = (2, 2)))
+
+# Adding a second convolutional layer
+classifier.add(Convolution2D(16, (3, 3), activation = 'relu'))
+classifier.add(MaxPooling2D(pool_size = (2, 2)))
+
+# Step 3 - Flattening
+classifier.add(Flatten())
+
+# Step 4 - Full connection
+classifier.add(Dense(output_dim = 128, activation = 'relu'))
+classifier.add(Dense(output_dim = 1, activation = 'sigmoid'))
+
+# Compiling the CNN
+classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
+
+
+
+
+{'val_loss': [1.2688259727282474, 0.6687024347314691, 0.5511806828683276, 0.2722445161143222, 0.33902552124814866], 'val_acc': [0.2844196365600576, 0.6215538060923492, 0.773326643574475, 0.8932503215206562, 0.8739553771954055], 'loss': [0.6433095011711121, 0.5732311593294144, 0.37620097121518353, 0.28417251801490784, 0.24984736402332783], 'acc': [0.62525, 0.714, 0.8561412295501731, 0.894125, 0.90825]}
+
+
+
+#### 2 
+Cambiado el núm de filtros en la segunda capa por 64 de nuevo
+
+{'val_loss': [1.6105297830064866, 0.9795918414100546, 0.2520079208564892, 0.19750757050759404, 0.1818559976085327], 'val_acc': [0.32176735290680447, 0.4840667440417502, 0.8873767227494695, 0.9064391682461529, 0.933928095478915], 'loss': [0.6484856964349747, 0.5250570528507232, 0.3245940997625705, 0.2419669449031353, 0.2145564967766404], 'acc': [0.62575, 0.75025, 0.8801802929760861, 0.90775, 0.921125]}
+
+#### 3
+Tres capas de 32, con segundo valor en (7,7), (5,5) y (3,3)
+
+{'val_loss': [1.0715435781405465, 0.8073385814729727, 0.27525732014773613, 0.23106232996603193, 0.18545567959760645], 'val_acc': [0.3265965286302429, 0.5985948624528046, 0.8908418131481344, 0.9269203023863337, 0.9493093338007312], 'loss': [0.6510852998495102, 0.5403368376493454, 0.34465467552600226, 0.23958164235949517, 0.20297674226760865], 'acc': [0.625, 0.733875, 0.8550143984123212, 0.92025, 0.932875]}
+
